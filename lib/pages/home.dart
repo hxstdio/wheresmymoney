@@ -72,6 +72,12 @@ class HomePage extends StatelessWidget {
             }).toList(),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          print('TODO: go to add record page');
+        },
+        child: Icon(Icons.add),
       )
     );
   }

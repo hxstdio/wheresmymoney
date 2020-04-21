@@ -25,7 +25,11 @@ class HomePage extends StatelessWidget {
                     IconButton(
                       icon: Icon(Icons.person_outline),
                       onPressed: (){
-                        print('TODO: jump to about');
+                        Navigator.pushNamed(
+                          context, 
+                          '/about', 
+                          // arguments: ScreenArguments('From Home', 'Hao')
+                        );
                       },
                     )
                   ],
@@ -39,7 +43,11 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          print('TODO: go to add record page');
+          Navigator.pushNamed(
+            context, 
+            '/add', 
+            // arguments: ScreenArguments('From Home', 'Hao')
+          );
         },
         child: Icon(Icons.add),
       )

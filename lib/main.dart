@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './pages/home.dart';
-import './utils/constants.dart';
+import './utils/constants.dart' show appName;
 
 void main() {
   runApp(MyApp());

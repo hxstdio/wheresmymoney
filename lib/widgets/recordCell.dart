@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/enums.dart' show RecordType, CostSubType, IncomeSubType;
+import '../models/enums.dart' show RecordType;
 
 class RecordCell extends StatelessWidget {
   final int type;

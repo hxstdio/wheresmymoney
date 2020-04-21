@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wheresmymoney/widgets/recordCell.dart';
+import './recordCell.dart';
 import './titleCell.dart';
 
 class TabView extends StatelessWidget {

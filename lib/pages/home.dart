@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/tabView.dart';
-import '../utils/constants.dart';
+import '../utils/constants.dart' show tabs, appName;
 
 class HomePage extends StatelessWidget {
   @override

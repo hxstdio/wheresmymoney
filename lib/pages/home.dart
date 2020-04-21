@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wheresmymoney/widgets/toolBar.dart';
 import '../widgets/tabView.dart';
+import '../widgets/summaryCell.dart';
 import '../utils/constants.dart' show tabs, appName;
 
 class HomePage extends StatelessWidget {
@@ -20,8 +22,10 @@ class HomePage extends StatelessWidget {
                   floating: false,
                   snap: false,
                   primary: true,
-                  expandedHeight: 230.0,
 
+                  // TODO4: real data
+                  // flexibleSpace: SummaryCell(currentDate: 1587445197278, totalCost: 129.34, totalIncome: 3400.00,),
+                  
                   actions: <Widget>[
                     IconButton(
                       icon: Icon(Icons.person_outline),
@@ -31,9 +35,10 @@ class HomePage extends StatelessWidget {
                     )
                   ],
 
-                  bottom: TabBar(
-                    tabs: tabs.map((String name) => Tab(text: name)).toList(),
-                  ),
+                  bottom: ToolBar(tabs: tabs, currentDate: null, totalCost: null, totalIncome: null),
+                  // bottom: TabBar(
+                  //   tabs: tabs.map((String name) => Tab(text: name)).toList(),
+                  // ),
                 ),
               )
             ];

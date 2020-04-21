@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-        primaryColor: Color(0xff4caf50),
-        primaryColorDark: Color(0xff388E3C),
+        primaryColor: Color(0xff8891A0), // TODO
+        primaryColorDark: Color(0xff388E3C), // TODO
       ),
       home: HomePage(),
     );

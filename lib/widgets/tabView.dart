@@ -33,8 +33,8 @@ class TabView extends StatelessWidget {
                           return Column(
                             children: [
                               TitleCell(cost: 10.0, income: 20.0, createDate: 1587445197278),
-                              RecordCell(type: 0, subType: 0, name: '拣到的钱', amount: 20.0),
-                              RecordCell(type: 1, subType: 0, name: '拣到的钱', amount: 20.0),
+                              RecordCell(type: 0, subType: 0, name: '拣到的钱1', amount: 20.0),
+                              RecordCell(type: 1, subType: 0, name: '拣到的钱2', amount: 20.0),
                               RecordCell(type: 0, subType: 1, name: '拣到的钱', amount: 20.0)
                             ],
                           );

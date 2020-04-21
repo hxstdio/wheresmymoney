@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/tabView.dart';
 import '../utils/constants.dart';
 
 class HomePage extends StatelessWidget {
@@ -37,40 +38,7 @@ class HomePage extends StatelessWidget {
               )
             ];
           },
-          body: TabBarView(
-            children: tabs.map((String name) {
-              return SafeArea(
-                top: false,
-                bottom: false,
-                child: Builder(
-                  builder: (BuildContext context) {
-                    return CustomScrollView(
-                      key: PageStorageKey<String>(name),
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                        ),
-                        SliverPadding(
-                          padding: const EdgeInsets.all(10.0),
-                          sliver: SliverFixedExtentList(
-                            itemExtent: 50.0,
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                                return ListTile(
-                                  title: Text('Hao $index'),
-                                );
-                              },
-                              childCount: 30,
-                            ), 
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                ),
-              );
-            }).toList(),
-          ),
+          body: TabView(tabs: tabs)
         ),
       ),
       floatingActionButton: FloatingActionButton(

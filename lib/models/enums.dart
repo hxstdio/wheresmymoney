@@ -3,13 +3,21 @@ enum RecordType {
   income
 }
 
-enum RecordSubType {
+enum CostSubType {
   common,
   food,
-  costume,
+  clothes,
   traffic,
   entertainment,
   social,
   house,
-  education
+  education,
+  travel,
+  medical,
+}
+
+enum IncomeSubType {
+  salary,
+  award,
+  other
 }

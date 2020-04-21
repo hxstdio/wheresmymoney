@@ -1,3 +1,5 @@
 final String appName = '记账本';
 
-final tabs = <String>['明细','类别'];
+final List<String> tabs = ['明细','类别'];
+
+final List<String> weekMapping = ['一', '二', '三', '四', '五', '六', '日'];

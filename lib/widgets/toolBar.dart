@@ -26,7 +26,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           SummaryCell(
             cellHeight: containerHeight, 
-            currentDate: currentDate,
+            selectedDate: currentDate,
             totalIncome: totalIncome,
             totalCost: totalCost,
             ),

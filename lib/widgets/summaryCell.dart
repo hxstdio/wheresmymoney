@@ -4,70 +4,85 @@ import '../utils/constants.dart' show appBgColor;
 
 class SummaryCell extends StatelessWidget {
   final double cellHeight;
-  final int currentDate;
+  final int selectedDate;
   final double totalCost;
   final double totalIncome;
   
   SummaryCell({
     Key key ,
     @required this.cellHeight,
-    @required this.currentDate,
+    @required this.selectedDate,
     @required this.totalCost,
     @required this.totalIncome,
   }):super(key:key);
 
   @override
-  Widget build(BuildContext context) {   
+  Widget build(BuildContext context) {  
+    var selectedDateTime = DateTime.fromMillisecondsSinceEpoch(selectedDate);
+
     return Container(      
       decoration: BoxDecoration(
         color: Color(appBgColor),
       ),
       child: Row(
         children: [
-          Container(
-            height: cellHeight,
-            padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
-            decoration: BoxDecoration(
-              color: Color(appBgColor),
-              border: Border(right: BorderSide(width: 0.3, color: Color(0xFFF2F3F4)))
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '2020年',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '04',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32.0
-                      ),
-                    ),
-                    Text(
-                      '月',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_drop_down),
+          GestureDetector(
+            onTap: (){
+              showDatePicker(
+                context: context,
+                initialDate: selectedDateTime,
+                firstDate: selectedDateTime.subtract(Duration(days: 365)),
+                lastDate: DateTime.now(),
+              ).then((value) {
+                // TODO10, 写入 state，触发数据获取，更新UI
+                print(value.toString());
+              });
+            },
+            child: Container(
+              height: cellHeight,
+              padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
+              decoration: BoxDecoration(
+                color: Color(appBgColor),
+                border: Border(right: BorderSide(width: 0.3, color: Color(0xFFF2F3F4)))
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '2020年',
+                    style: TextStyle(
                       color: Colors.white,
-                      onPressed: () {
-                        print('TODO: date selection');
-                      },
-                    )
-                  ],
-                ),
-              ],
+                      fontSize: 12.0
+                    ),
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '04',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 32.0
+                        ),
+                      ),
+                      Text(
+                        '月',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.arrow_drop_down),
+                        color: Colors.white,
+                        onPressed: () {
+                          print('TODO: date selection');
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           AmountCell(cellHeight: cellHeight, title: '支出(元)', desc: '$totalCost'),

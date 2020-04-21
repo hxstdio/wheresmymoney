@@ -4,6 +4,12 @@ import '../widgets/tabView.dart';
 import '../utils/constants.dart' show tabs, appName;
 
 class HomePage extends StatelessWidget {
+
+  // TODO get this data from state
+  final int currentDate = 1587474556767;
+  final double totalCost = 189.80;
+  final double totalIncome = 9999.00;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +39,7 @@ class HomePage extends StatelessWidget {
                       },
                     )
                   ],
-                  bottom: ToolBar(tabs: tabs, currentDate: null, totalCost: 189.80, totalIncome: 9999.00),
+                  bottom: ToolBar(tabs: tabs, currentDate: currentDate, totalCost: totalCost, totalIncome: totalIncome),
                 ),
               )
             ];

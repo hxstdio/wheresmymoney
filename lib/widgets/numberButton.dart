@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+const double HardCodeHeight = 64.0;
+
 class NumberButton extends StatelessWidget {
-  final int desc;
+  final String desc;
   final onPress;
 
   NumberButton({
@@ -15,17 +17,14 @@ class NumberButton extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: const EdgeInsets.only(right: 10.0),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1.0, color: Color(0xFFE1E1E6)),
-        ),
+        margin: EdgeInsets.only(top: 10.0),
         child: MaterialButton(
-          height: 64,
+          height: HardCodeHeight,
           onPressed: (){
             onPress(desc);
           },
           color: Color(0xFFF0F0F0),
-          child: Text('$desc', style: TextStyle(
+          child: Text(desc, style: TextStyle(
             fontSize: 20.0,
             color: Colors.black
           )),
@@ -35,22 +34,26 @@ class NumberButton extends StatelessWidget {
   }
 }
 
-class NumberBtnRow extends StatelessWidget {
+class NumberBtnColumn extends StatelessWidget {
   final onPress;
-  final List<int> numbers;
+  final List<String> numbers;
 
-  NumberBtnRow({
+  NumberBtnColumn({
     Key key ,
     @required this.onPress,
     @required this.numbers,
   }):super(key:key);
 
   Widget build(BuildContext context) {
+    List<Widget> numberButtons = []; 
+    numbers.asMap().forEach((key, value) {
+      numberButtons.add(NumberButton(desc: value, onPress: onPress));
+    });
+
     return Expanded(
       child: Container(
-        margin: const EdgeInsets.only(top: 10.0),
-        child: Row(
-          children: numbers.map((e) => NumberButton(desc: e, onPress: onPress)).toList()
+        child: Column(
+          children: numberButtons
         ),
       ),
     );
@@ -67,41 +70,65 @@ class NumberContainer extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: Row(
         children: [
-          NumberBtnRow(numbers: [1, 2, 3], onPress: onPress),
-          NumberBtnRow(numbers: [4, 5, 6], onPress: onPress),
-          NumberBtnRow(numbers: [7, 8, 9], onPress: onPress),
           Expanded(
+            flex: 1,
             child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 10.0, 10.0, 0),
-              child: Row(
+              margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+              child: Column(
                 children: [
-                  NumberButton(desc: 0, onPress: onPress),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 1.0, color: Color(0xFFE1E1E6)),
-                      ),
-                      child: MaterialButton(
-                        height: 64,
-                        onPressed: (){
-                          // onPress();
-                        },
-                        color: Color(0xFFF0F0F0),
-                        child: Text('0', style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.black
-                        )),
-                      ),
-                    )
-                  )
+                  NumberBtnColumn(numbers: ['1', '4', '7', '.'], onPress: onPress),
                 ],
               ),
             ),
-          )
-        ]
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                            child: Column(
+                              children: [
+                                NumberBtnColumn(numbers: ['2', '5', '8'], onPress: onPress),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                            child: Column(
+                              children: [
+                                NumberBtnColumn(numbers: ['3', '6', '9'], onPress: onPress),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ]
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                      child: Row(
+                        children: [NumberButton(desc: '0', onPress: onPress)]
+                      )
+                    )
+                  )
+                ]
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

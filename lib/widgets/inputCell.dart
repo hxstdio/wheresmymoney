@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 import './numberButton.dart';
 
 class InputCell extends StatefulWidget {
+  final onSubmit;
+
+  InputCell({
+    Key key ,
+    this.onSubmit,
+  }):super(key:key);
+
   @override
   _InputCell createState() => _InputCell();
 }
@@ -119,7 +126,17 @@ class _InputCell extends State<InputCell> {
                               minWidth: 100.0,
                               height: 140.0,
                               onPressed: (){
-                                // TODO1: insert new record to sqflite
+                                var numberValue = double.tryParse(this.inputValue);
+
+                                if (numberValue == 0 || numberValue == null){
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('请输入有效的金额'),
+                                    duration: Duration(milliseconds: 1000),
+                                  ));
+                                  return;
+                                }
+
+                                widget.onSubmit(numberValue);
                               },
                               color: Color(0xFF1790C3),
                               child: Text('完成', style: TextStyle(

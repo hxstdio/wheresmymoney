@@ -10,6 +10,10 @@ class AddRecord extends StatefulWidget{
 class _AddRecordState extends State<AddRecord> {
   bool isAddCost = true;
 
+  _onSubmit(double amount) {
+    print(amount);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +46,7 @@ class _AddRecordState extends State<AddRecord> {
         child: Column(
           children: [
             TypeSelectCell(isCost: this.isAddCost),
-            InputCell()
+            InputCell(onSubmit: _onSubmit)
           ],
         ),
       )

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
               )
             ];
           },
-          body: TabView(tabs: tabs)
+          body: TabView()
         ),
       ),
       floatingActionButton: FloatingActionButton(

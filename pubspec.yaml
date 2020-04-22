@@ -26,6 +26,8 @@ dependencies:
 
   provider: ^3.0.0
 
+  fl_chart: ^0.9.2
+
   sqflite: 1.0.0
 
 

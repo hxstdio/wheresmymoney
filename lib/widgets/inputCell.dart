@@ -85,13 +85,16 @@ class _InputCell extends State<InputCell> {
                                 minWidth: 100.0,
                                 height: 140.0,
                                 onPressed: (){
-                                  // TODO2: delete the input value
+                                  this.setState(() {
+                                    if (this.inputValue.length == 0){
+                                      return;
+                                    }
+
+                                    this.inputValue = this.inputValue.substring(0, this.inputValue.length - 1);
+                                  });
                                 },
                                 color: Colors.grey,
-                                child: Text('删', style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.white
-                                )),
+                                child: Icon(Icons.backspace, color: Colors.white70)
                               ),
                             ),
                             MaterialButton(

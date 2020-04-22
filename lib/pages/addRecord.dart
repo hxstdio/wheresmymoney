@@ -41,7 +41,7 @@ class _AddRecordState extends State<AddRecord> {
         ),
         child: Column(
           children: [
-            TypeSelectCell(),
+            TypeSelectCell(isCost: this.isAddCost),
             InputCell()
           ],
         ),

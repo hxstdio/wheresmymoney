@@ -1,30 +1,12 @@
 import 'package:flutter/material.dart';
 import '../models/enums.dart' show RecordType;
+import '../utils/constants.dart' show costIconMapping, incomeIconMapping;
 
 class RecordCell extends StatelessWidget {
   final int type;
   final int subType;
   final String name;
   final double amount;
-
-  final costIconMapping = {
-    0: Icons.attach_money,
-    1: Icons.fastfood,
-    2: Icons.shop,
-    3: Icons.traffic,
-    4: Icons.music_note,
-    5: Icons.people_outline,
-    6: Icons.home,
-    7: Icons.school,
-    8: Icons.nature_people,
-    9: Icons.local_hospital,
-  };
-
-  final incomeIconMapping = {
-    0: Icons.tag_faces,
-    1: Icons.card_giftcard,
-    2: Icons.payment
-  };
   
   RecordCell({
     Key key ,
@@ -51,7 +33,7 @@ class RecordCell extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 5.0, 0, 5.0),
             child: Row(children: [
               Icon(
-                icon,
+                icon['icon'],
                 color: iconColor,
               ),
               Container(

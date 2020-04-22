@@ -8,6 +8,7 @@ class InputCell extends StatefulWidget {
 
 class _InputCell extends State<InputCell> {
   String inputValue = '';
+  bool isSnackBarShow = false;
 
   _onPressNumber(e){
     // the first input is .
@@ -17,6 +18,23 @@ class _InputCell extends State<InputCell> {
 
     // alread has .
     if (e == '.' && this.inputValue.indexOf('.') > -1) {
+      return;
+    }
+
+    if (this.inputValue.length == 9) {
+      if (this.isSnackBarShow) {
+        return;
+      }
+      
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('别点了, 你没这么多钱 =.=#'),
+        duration: Duration(milliseconds: 1000),
+        onVisible: (){
+          this.setState(() {
+            this.isSnackBarShow = true;
+          });
+        }
+      ));
       return;
     }
 

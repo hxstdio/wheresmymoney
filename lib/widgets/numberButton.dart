@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 
 class NumberButton extends StatelessWidget {
   final int desc;
-  var onPress;
+  final onPress;
 
   NumberButton({
     Key key ,
@@ -14,6 +13,7 @@ class NumberButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {  
     return Expanded(
+      flex: 1,
       child: Container(
         margin: const EdgeInsets.only(right: 10.0),
         decoration: BoxDecoration(
@@ -75,11 +75,29 @@ class NumberContainer extends StatelessWidget {
           Expanded(
             child: Container(
               margin: const EdgeInsets.fromLTRB(0, 10.0, 10.0, 0),
-              decoration: BoxDecoration(
-                color: Colors.grey
-              ),
               child: Row(
-                // TODO9：the bottom buttons
+                children: [
+                  NumberButton(desc: 0, onPress: onPress),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1.0, color: Color(0xFFE1E1E6)),
+                      ),
+                      child: MaterialButton(
+                        height: 64,
+                        onPressed: (){
+                          // onPress();
+                        },
+                        color: Color(0xFFF0F0F0),
+                        child: Text('0', style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black
+                        )),
+                      ),
+                    )
+                  )
+                ],
               ),
             ),
           )

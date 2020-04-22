@@ -14,7 +14,7 @@ class TypeSelectCell extends StatefulWidget {
 }
 
 class _TypeSelectCell  extends State<TypeSelectCell> {
-  int selectedTypeIndex = -1;
+  int selectedTypeIndex = 0;
 
   _renderTypeIcons(){
     var data = widget.isCost ? costIconMapping : incomeIconMapping;

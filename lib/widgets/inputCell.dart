@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import './numberButton.dart';
 
-class InputCell extends StatelessWidget {
-  
-  InputCell({
-    Key key ,
-  }):super(key:key);
+class InputCell extends StatefulWidget {
+  @override
+  _InputCell createState() => _InputCell();
+}
+
+class _InputCell extends State<InputCell> {
+  String inputValue = '';
 
   _onPressNumber(e){
-    print('pressed: $e');
+    // the first input is .
+    if(inputValue.length == 0 && e == '.'){
+      return;
+    }
+
+    // alread has .
+    if (e == '.' && this.inputValue.indexOf('.') > -1) {
+      return;
+    }
+
+    this.setState(() {
+      this.inputValue += e.toString();
+    });
   }
 
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -33,14 +47,16 @@ class InputCell extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
-                        '0', // TODO6: input value from local state
+                        this.inputValue, 
                         style: TextStyle(
                           fontSize: 22.0
                         ),
                       ),
                       GestureDetector(
                         onTap: (){
-                          print('TODO: delete input value from local state');
+                          this.setState(() {
+                            this.inputValue = '';
+                          });
                         },
                         child: Container(
                           margin: const EdgeInsets.only(left: 10.0),

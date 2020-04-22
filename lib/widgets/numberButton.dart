@@ -75,7 +75,7 @@ class NumberContainer extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+              margin: const EdgeInsets.only(right: 10.0),
               child: Column(
                 children: [
                   NumberBtnColumn(numbers: ['1', '4', '7', '.'], onPress: onPress),
@@ -94,7 +94,7 @@ class NumberContainer extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                            margin: const EdgeInsets.only(right: 10.0),
                             child: Column(
                               children: [
                                 NumberBtnColumn(numbers: ['2', '5', '8'], onPress: onPress),
@@ -104,7 +104,7 @@ class NumberContainer extends StatelessWidget {
                         ),
                         Expanded(
                           child: Container(
-                            margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                            margin: const EdgeInsets.only(right: 10.0),
                             child: Column(
                               children: [
                                 NumberBtnColumn(numbers: ['3', '6', '9'], onPress: onPress),
@@ -118,7 +118,7 @@ class NumberContainer extends StatelessWidget {
                   Expanded(
                     flex: 1,
                     child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 10.0, 0),
+                      margin: const EdgeInsets.only(right: 10.0),
                       child: Row(
                         children: [NumberButton(desc: '0', onPress: onPress)]
                       )

@@ -39,9 +39,41 @@ class DataBaseHelper {
       ''');
   }
 
+  Future<List> getItemByMonth(DateTime dateTime) async {
+    var dbClient = await db;
+
+    var year = dateTime.year;
+    var monthStr = dateTime.month < 10 ? '0${dateTime.month}' : '${dateTime.month}';
+    var firstDayOfMonth = DateTime.parse('$year-$monthStr-01').millisecondsSinceEpoch;
+    
+    var nextTagYear = dateTime.month == 12 ? dateTime.year + 1 : dateTime.year;
+    var nextTagMonth = dateTime.month == 12 ? 1 : dateTime.month + 1;
+    var nextTagMonthStr = nextTagMonth < 10 ? '0${nextTagMonth}' : '${nextTagMonth}';
+    var firstDayOfNextMonth = DateTime.parse('$nextTagYear-$nextTagMonthStr-01').millisecondsSinceEpoch;
+    
+    var sqlStr = "SELECT * FROM $tableName WHERE $columnCreateDate >= $firstDayOfMonth AND $columnCreateDate < $firstDayOfNextMonth";
+    print(sqlStr);
+    var result = await dbClient.rawQuery(sqlStr);
+    return result.toList();
+  }
+
+  Future<List> getItemByMs(int dateTimeInMs) async {
+    var dbClient = await db;
+    var result = await dbClient.rawQuery("SELECT * FROM $tableName WHERE $columnCreateDate = $dateTimeInMs");
+    return result.toList();
+  }
+
+  Future<List> getItemByTest() async {
+    var start = 1582992000000;
+    var end = 1585670400000;
+    var dbClient = await db;
+    var result = await dbClient.rawQuery("SELECT * FROM $tableName WHERE $columnCreateDate >= $start AND $columnCreateDate < $end");
+    return result.toList();
+  }
+
   Future<List> getTotalList() async {
     var dbClient = await db;
-    var result = await dbClient.rawQuery("SELECT * FROM $tableName ");
+    var result = await dbClient.rawQuery("SELECT * FROM $tableName");
     return result.toList();
   }
 

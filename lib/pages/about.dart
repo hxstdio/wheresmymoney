@@ -28,6 +28,49 @@ class About extends StatelessWidget {
               },
               child: Text('Clear db'),
             ),
+            RaisedButton(
+              onPressed: () {
+                db.getTotalList().then((value) {
+                  print('-->');
+                  value.forEach((element) {
+                    var createDate = element['createDate'];
+                    var dd = DateTime.fromMillisecondsSinceEpoch(createDate);
+                    print('${dd.year}-${dd.month}-${dd.day}: $element');
+                  });
+                });
+              },
+              child: Text('select all'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                db.getItemByMs(1585756800000).then((value) {
+                  print('-->');
+                  print(value);
+
+                  value.forEach((element) {
+                    var createDate = element['createDate'];
+                    var dd = DateTime.fromMillisecondsSinceEpoch(createDate);
+                    print('${dd.year} - ${dd.month} - ${dd.day}');
+                  });
+                });
+              },
+              child: Text('select by day'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                db.getItemByTest().then((value) {
+                  print('-->');
+                  print(value);
+
+                  value.forEach((element) {
+                    var createDate = element['createDate'];
+                    var dd = DateTime.fromMillisecondsSinceEpoch(createDate);
+                    print('${dd.year} - ${dd.month} - ${dd.day}');
+                  });
+                });
+              },
+              child: Text('select by test'),
+            ),
           ]
         )
       )

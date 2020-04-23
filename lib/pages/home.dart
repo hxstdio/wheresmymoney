@@ -18,19 +18,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    db.getTotalList().then((value){
-      this._formatRecord(value);
-      print(value);
-    });
-
+    this._getDataByMonth(this.currentDate);
     super.initState();
   }
 
-  _formatRecord(List records) {
-    if(records.length == 0) {
-      return;
-    }
+  _getDataByMonth(DateTime selectedDate) {
+    print('-->start');
+    db.getItemByMonth(selectedDate).then((value){
+      print('-->done: ${value.length}');
+      this._formatRecord(value);
+      print(value);
+    });
+  }
 
+  _formatRecord(List records) {
     double _cost = 0;
     double _income = 0;
 
@@ -47,14 +48,14 @@ class _HomePageState extends State<HomePage> {
       this.totalCost = _cost.toStringAsFixed(2);
       this.totalIncome = _income.toStringAsFixed(2);
     });
-    
   }
 
   _handleDateSelected(DateTime selectedDate) {
-    print('=====>$selectedDate');
     this.setState(() {
       this.currentDate = selectedDate;
     });
+
+    this._getDataByMonth(selectedDate);
   }
 
   @override

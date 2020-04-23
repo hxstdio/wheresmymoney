@@ -34,13 +34,16 @@ class SummaryCell extends StatelessWidget {
                 firstDate: selectedDate.subtract(Duration(days: 365)),
                 lastDate: DateTime.now(),
               ).then((value) {
-                // TODO10, 写入 state，触发数据获取，更新UI
+                if (value == null) {
+                  return;
+                }
+                
                 this.onDateSelected(value);
               });
             },
             child: Container(
               height: cellHeight,
-              padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
               decoration: BoxDecoration(
                 color: Color(appBgColor),
                 border: Border(right: BorderSide(width: 0.3, color: Color(0xFFF2F3F4)))
@@ -72,13 +75,7 @@ class SummaryCell extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_drop_down),
-                        color: Colors.white,
-                        onPressed: () {
-                          print('TODO: date selection');
-                        },
-                      )
+                      Icon(Icons.arrow_drop_down,color: Colors.white,size:30)
                     ],
                   ),
                 ],

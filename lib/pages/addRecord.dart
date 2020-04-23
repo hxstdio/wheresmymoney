@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wheresmymoney/utils/constants.dart';
 import 'package:wheresmymoney/widgets/inputCell.dart';
 import 'package:wheresmymoney/widgets/typeSelectCell.dart';
+import '../models/db.dart';
+import '../models/record.dart';
 
 class AddRecord extends StatefulWidget{
   @override
@@ -12,19 +15,28 @@ class _AddRecordState extends State<AddRecord> {
   DateTime currentDay;
   int subType;
 
+  var db = DataBaseHelper();
+
   @override
   void initState() {
     isAddCost = true;
     currentDay = DateTime.now();
     subType = 0;
     super.initState();
+    db.getTotalList().then((value) => print(value));
   }
 
   void _onSubmit(double amount) {
-    print('amount: $amount');
-    print('isAddCost: $isAddCost');
-    print('currentDay: $currentDay');
-    print('subType: $subType');
+    Record record = new Record();
+    record.amount = amount;
+    record.type = this.isAddCost ? 0 : 1;
+    record.subType = this.subType;
+    record.name = this.isAddCost ? costIconMapping[subType]['name'] : incomeIconMapping[subType]['name'];
+    record.id = DateTime.now().millisecondsSinceEpoch;
+    record.createDate = this.currentDay.millisecondsSinceEpoch;
+
+    db.saveItem(record);
+    Navigator.pop(context);
   }
 
   void _handleDayChanged(DateTime selectedDateTime) {

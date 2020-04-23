@@ -13,6 +13,7 @@ class Record {
   int type;
   int subType;
   double amount;
+  int createDate;
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic> {
@@ -20,7 +21,8 @@ class Record {
       columnName: name,
       columnType: type,
       columnSubType: subType,
-      columnAmount: amount
+      columnAmount: amount,
+      columnCreateDate: createDate
     };
 
     return map;
@@ -33,6 +35,7 @@ class Record {
     record.type = map[columnType];
     record.subType = map[columnSubType];
     record.amount = map[columnAmount];
+    record.createDate = map[columnCreateDate];
 
     return record;
   }

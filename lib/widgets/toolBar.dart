@@ -3,12 +3,13 @@ import 'package:wheresmymoney/widgets/summaryCell.dart';
 import '../utils/constants.dart' show tabBarBgColor;
 
 class ToolBar extends StatelessWidget implements PreferredSizeWidget {
-  final int currentDate;
-  final double totalCost;
-  final double totalIncome;
+  final DateTime currentDate;
+  final String totalCost;
+  final String totalIncome;
   final List<String> tabs;
   final double containerHeight = 90.0;
   final double tabBarHeight = 40.0;
+  final onDateSelected;
   
   ToolBar({
     Key key ,
@@ -16,6 +17,7 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
     @required this.currentDate,
     @required this.totalCost,
     @required this.totalIncome,
+    @required this.onDateSelected,
   }):super(key:key);
 
   @override
@@ -29,7 +31,8 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
             selectedDate: currentDate,
             totalIncome: totalIncome,
             totalCost: totalCost,
-            ),
+            onDateSelected: onDateSelected,
+          ),
           Material(
             color: Color(tabBarBgColor),
             child: TabBar(

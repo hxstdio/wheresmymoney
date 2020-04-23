@@ -2,13 +2,60 @@ import 'package:flutter/material.dart';
 import 'package:wheresmymoney/widgets/toolBar.dart';
 import '../widgets/tabView.dart';
 import '../utils/constants.dart' show tabs, appName;
+import '../models/db.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-  // TODO get this data from state
-  final int currentDate = 1587474556767;
-  final double totalCost = 189.80;
-  final double totalIncome = 9999.00;
+class _HomePageState extends State<HomePage> {
+  var db = DataBaseHelper();
+  var records = [];
+  String totalCost = '0';
+  String totalIncome = '0';
+  DateTime currentDate = DateTime.now();
+
+  @override
+  void initState() {
+    db.getTotalList().then((value){
+      this._formatRecord(value);
+      print(value);
+    });
+
+    super.initState();
+  }
+
+  _formatRecord(List records) {
+    if(records.length == 0) {
+      return;
+    }
+
+    double _cost = 0;
+    double _income = 0;
+
+    records.forEach((element) {
+      print(element['amount']);
+      if (element['type'] == 0) {
+        _cost += element['amount'];
+      } else {
+        _income += element['amount'];
+      }
+    });
+
+    this.setState(() {
+      this.totalCost = _cost.toStringAsFixed(2);
+      this.totalIncome = _income.toStringAsFixed(2);
+    });
+    
+  }
+
+  _handleDateSelected(DateTime selectedDate) {
+    print('=====>$selectedDate');
+    this.setState(() {
+      this.currentDate = selectedDate;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +86,13 @@ class HomePage extends StatelessWidget {
                       },
                     )
                   ],
-                  bottom: ToolBar(tabs: tabs, currentDate: currentDate, totalCost: totalCost, totalIncome: totalIncome),
+                  bottom: ToolBar(
+                    tabs: tabs, 
+                    currentDate: currentDate, 
+                    totalCost: totalCost, 
+                    totalIncome: totalIncome,
+                    onDateSelected: _handleDateSelected,
+                  ),
                 ),
               )
             ];

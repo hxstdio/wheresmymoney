@@ -32,7 +32,7 @@ class AmountCell extends StatelessWidget {
               desc,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24.0
+                fontSize: 20.0
               ),
             )
           ],

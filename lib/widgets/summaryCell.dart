@@ -4,9 +4,10 @@ import '../utils/constants.dart' show appBgColor;
 
 class SummaryCell extends StatelessWidget {
   final double cellHeight;
-  final int selectedDate;
-  final double totalCost;
-  final double totalIncome;
+  final DateTime selectedDate;
+  final String totalCost;
+  final String totalIncome;
+  final onDateSelected;
   
   SummaryCell({
     Key key ,
@@ -14,12 +15,11 @@ class SummaryCell extends StatelessWidget {
     @required this.selectedDate,
     @required this.totalCost,
     @required this.totalIncome,
+    @required this.onDateSelected
   }):super(key:key);
 
   @override
   Widget build(BuildContext context) {  
-    var selectedDateTime = DateTime.fromMillisecondsSinceEpoch(selectedDate);
-
     return Container(      
       decoration: BoxDecoration(
         color: Color(appBgColor),
@@ -30,12 +30,12 @@ class SummaryCell extends StatelessWidget {
             onTap: (){
               showDatePicker(
                 context: context,
-                initialDate: selectedDateTime,
-                firstDate: selectedDateTime.subtract(Duration(days: 365)),
+                initialDate: selectedDate,
+                firstDate: selectedDate.subtract(Duration(days: 365)),
                 lastDate: DateTime.now(),
               ).then((value) {
                 // TODO10, 写入 state，触发数据获取，更新UI
-                print(value.toString());
+                this.onDateSelected(value);
               });
             },
             child: Container(
@@ -50,7 +50,7 @@ class SummaryCell extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '2020年',
+                    '${selectedDate.year}年',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12.0
@@ -60,7 +60,7 @@ class SummaryCell extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '04',
+                        '${selectedDate.month}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 32.0

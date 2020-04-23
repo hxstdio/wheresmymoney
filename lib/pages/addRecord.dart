@@ -8,10 +8,35 @@ class AddRecord extends StatefulWidget{
 }
 
 class _AddRecordState extends State<AddRecord> {
-  bool isAddCost = true;
+  bool isAddCost;
+  DateTime currentDay;
+  int subType;
 
-  _onSubmit(double amount) {
-    print(amount);
+  @override
+  void initState() {
+    isAddCost = true;
+    currentDay = DateTime.now();
+    subType = 0;
+    super.initState();
+  }
+
+  void _onSubmit(double amount) {
+    print('amount: $amount');
+    print('isAddCost: $isAddCost');
+    print('currentDay: $currentDay');
+    print('subType: $subType');
+  }
+
+  void _handleDayChanged(DateTime selectedDateTime) {
+    this.setState(() {
+      this.currentDay = selectedDateTime;
+    });
+  }
+
+  void _handleSubTypeSelected(int subType) {
+    this.setState(() {
+      this.subType = subType;
+    });
   }
 
   @override
@@ -41,11 +66,17 @@ class _AddRecordState extends State<AddRecord> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Colors.blueGrey,
+          color: Colors.white,
         ),
         child: Column(
           children: [
-            TypeSelectCell(isCost: this.isAddCost),
+            TypeSelectCell(
+              isCost: this.isAddCost, 
+              currentDay: this.currentDay,
+              selectedSubType: this.subType,
+              onDayChanged: this._handleDayChanged,
+              onSubTypeSelected: this._handleSubTypeSelected,
+            ),
             InputCell(onSubmit: _onSubmit)
           ],
         ),

@@ -3,9 +3,11 @@ import './recordCell.dart';
 import './titleCell.dart';
 
 class RecordList extends StatelessWidget {
-  
+  final List data;
+
   RecordList({
     Key key ,
+    @required this.data
   }):super(key:key);  
 
   static const double sliverPadding = 0;
@@ -40,8 +42,7 @@ class RecordList extends StatelessWidget {
                       );
                     },
 
-                    // TODO2: should use length of the data
-                    childCount: 10, 
+                    childCount: 1, 
                   ), 
                 ),
               )

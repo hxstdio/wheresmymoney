@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var db = DataBaseHelper();
-  var records = [];
+  var listData = [];
   String totalCost = '0';
   String totalIncome = '0';
   DateTime currentDate = DateTime.now();
@@ -23,11 +23,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   _getDataByMonth(DateTime selectedDate) {
-    print('-->start');
     db.getItemByMonth(selectedDate).then((value){
-      print('-->done: ${value.length}');
       this._formatRecord(value);
-      print(value);
     });
   }
 
@@ -36,7 +33,6 @@ class _HomePageState extends State<HomePage> {
     double _income = 0;
 
     records.forEach((element) {
-      print(element['amount']);
       if (element['type'] == 0) {
         _cost += element['amount'];
       } else {
@@ -56,6 +52,10 @@ class _HomePageState extends State<HomePage> {
     });
 
     this._getDataByMonth(selectedDate);
+  }
+
+  _formatListData(List records) {
+    // todo 按天聚合数据
   }
 
   @override
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
               )
             ];
           },
-          body: TabView()
+          body: TabView(records: this.listData,)
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -3,14 +3,16 @@ import './recordList.dart';
 import './pieChart.dart';
 
 class TabView extends StatelessWidget {
-  TabView({Key key}):super(key:key);
+  final List records;
+
+  TabView({Key key, @required this.records}):super(key:key);
   static const double sliverPadding = 0;
 
   @override
   Widget build(BuildContext context) {
     return TabBarView(
       children: [
-        RecordList(),
+        RecordList(data: records),
         RecordPieChart(),
       ]
     );

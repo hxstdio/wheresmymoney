@@ -7,6 +7,7 @@ class TypeSelectCell extends StatelessWidget {
   final int selectedSubType;
   final onDayChanged;
   final onSubTypeSelected;
+  final onCommentChanged;
   
   TypeSelectCell({
     Key key ,
@@ -15,6 +16,7 @@ class TypeSelectCell extends StatelessWidget {
     this.selectedSubType,
     this.onDayChanged,
     this.onSubTypeSelected,
+    this.onCommentChanged
   }):super(key:key);
 
   _renderTypeIcons(){
@@ -57,62 +59,71 @@ class TypeSelectCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {  
     return Expanded(
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    FlatButton(
-                      shape: Border.all(
-                        color: Colors.grey,
-                        width: 1.0,
-                        style: BorderStyle.solid
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children: [
+                FlatButton(
+                  shape: Border.all(
+                    color: Colors.grey,
+                    width: 1.0,
+                    style: BorderStyle.solid
+                  ),
+                  onPressed: (){
+                    showDatePicker(
+                      context: context,
+                      initialDate: this.currentDay,
+                      firstDate: this.currentDay.subtract(Duration(days: 365)),
+                      lastDate: DateTime.now(),
+                    ).then((DateTime selectedDateTime) {
+                      if(selectedDateTime != null) {
+                        this.onDayChanged(selectedDateTime);
+                      }
+                    });
+                  },
+                  child: Text('${this.currentDay.month}月${this.currentDay.day}日'),
+                ),
+                Expanded(
+                  child:  Container(
+                    margin: EdgeInsets.only(left: 15.0),
+                    child: TextField(
+                      autofocus: false,
+                      maxLength: 20,
+                      decoration: InputDecoration(
+                        labelText: "备注:",
+                        labelStyle: TextStyle(
+                          fontSize: 16.0
+                        )
                       ),
-                      onPressed: (){
-                        showDatePicker(
-                          context: context,
-                          initialDate: this.currentDay,
-                          firstDate: this.currentDay.subtract(Duration(days: 365)),
-                          lastDate: DateTime.now(),
-                        ).then((DateTime selectedDateTime) {
-                          if(selectedDateTime != null) {
-                            this.onDayChanged(selectedDateTime);
-                          }
-                        });
+                      onChanged: (value) {
+                        this.onCommentChanged(value);
                       },
-                      child: Text('${this.currentDay.month}月${this.currentDay.day}日'),
                     ),
-                    // Container(
-                    //   width: 100.0,
-                    //   height: 40.0,
-                    //   margin: const EdgeInsets.only(right: 10.0),
-                    //   decoration: BoxDecoration(
-                    //     border: Border.all(width: 1, color: Color(0xFFE1E1E6))
-                    //   ),
-                    //   child: Center(
-                    //     child: Text('增加备注1'),
-                    //   )
-                    // )
-                  ]
+                  ),
                 ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white
-                ),
-                height: 230.0,
-                child: GridView.count(
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 20.0,
-                  padding: EdgeInsets.all(10),
-                  crossAxisCount: 5,
-                  childAspectRatio: 1.0,
-                  children: _renderTypeIcons(),
-                ),
-              )
-            ]
+              ]
+            ),
           ),
-        );
+          Expanded(child: 
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white
+              ),
+              height: 230.0,
+              child: GridView.count(
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                padding: EdgeInsets.all(10),
+                crossAxisCount: 5,
+                childAspectRatio: 1.0,
+                children: _renderTypeIcons(),
+              ),
+            ),
+          ),
+        ]
+      ),
+    );
   }
 }

@@ -14,6 +14,7 @@ class _AddRecordState extends State<AddRecord> {
   bool isAddCost;
   DateTime currentDay;
   int subType;
+  String comment;
 
   var db = DataBaseHelper();
 
@@ -22,16 +23,18 @@ class _AddRecordState extends State<AddRecord> {
     isAddCost = true;
     currentDay = DateTime.now();
     subType = 0;
+    comment = '';
     super.initState();
     db.getTotalList().then((value) => print(value));
   }
 
   void _onSubmit(double amount) {
+    String name = this.isAddCost ? costIconMapping[subType]['name'] : incomeIconMapping[subType]['name'];
     Record record = new Record();
     record.amount = amount;
     record.type = this.isAddCost ? 0 : 1;
     record.subType = this.subType;
-    record.name = this.isAddCost ? costIconMapping[subType]['name'] : incomeIconMapping[subType]['name'];
+    record.name = this.comment == '' ? name : (name + ' - ${this.comment}');
     record.id = DateTime.now().millisecondsSinceEpoch;
     record.createDate = this.currentDay.millisecondsSinceEpoch;
 
@@ -51,6 +54,12 @@ class _AddRecordState extends State<AddRecord> {
     });
   }
 
+  void _handleCommentChanged(String inputValue) {
+    this.setState(() {
+      this.comment = inputValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +76,7 @@ class _AddRecordState extends State<AddRecord> {
                   onChanged: (bool val){
                     this.setState(() {
                       this.isAddCost = ! this.isAddCost;
+                      this.comment = '';
                     });
                   }
                 ),
@@ -88,6 +98,7 @@ class _AddRecordState extends State<AddRecord> {
               selectedSubType: this.subType,
               onDayChanged: this._handleDayChanged,
               onSubTypeSelected: this._handleSubTypeSelected,
+              onCommentChanged: this._handleCommentChanged,
             ),
             InputCell(onSubmit: _onSubmit)
           ],

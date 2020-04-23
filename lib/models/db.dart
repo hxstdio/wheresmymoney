@@ -50,4 +50,9 @@ class DataBaseHelper {
     int res = await dbClient.insert("$tableName", record.toMap());
     return res;
   }
+
+  Future<int> clear() async {
+    var dbClient = await db;
+    return await dbClient.delete(tableName);
+  }
 }

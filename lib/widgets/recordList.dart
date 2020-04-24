@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import './recordCell.dart';
 import './titleCell.dart';
+import '../models/record.dart';
 
 class RecordList extends StatelessWidget {
-  final List data;
+  final Map<int, List<Map<dynamic, dynamic>>> data;
 
   RecordList({
     Key key ,
@@ -12,8 +13,42 @@ class RecordList extends StatelessWidget {
 
   static const double sliverPadding = 0;
 
+  List _renderList(Map<int, List<Map<dynamic, dynamic>>> data) {
+    List<Widget> widgets = [];
+    data.forEach((int key, List<Map<dynamic, dynamic>> value) {
+      double cost = 0;
+      double income = 0;
+      int createDate = value[0]['$columnCreateDate'];
+      List<Widget> subWidgets = [];
+
+      value.forEach((element) {
+        if (element['$columnType'] == 0) {
+          cost += element['$columnAmount'];
+        } else {
+          income += element['$columnAmount'];
+        }
+        subWidgets.add(RecordCell(type: element['$columnType'], subType: element['$columnSubType'], name: element['$columnName'], amount: element['$columnAmount']));
+      });
+      widgets.add(TitleCell(cost: cost, income: income, createDate: createDate));
+      widgets.addAll(subWidgets);
+    });
+
+    if (widgets.length == 0){
+      widgets.add(Container(
+        margin: const EdgeInsets.only(top: 50.0),
+        child: Text('本月暂无纪录哦'),
+      ));
+    }
+
+    return widgets;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // print('recordList --->');
+    // print(data);
+    List<Widget> widgets = this._renderList(data);
+
     return SafeArea(
       top: false,
       bottom: false,
@@ -30,15 +65,8 @@ class RecordList extends StatelessWidget {
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-
-                      // TODO1：真实数据渲染
                       return Column(
-                        children: [
-                          TitleCell(cost: 10.0, income: 20.0, createDate: 1587445197278),
-                          RecordCell(type: 0, subType: 0, name: '拣到的钱1', amount: 20.0),
-                          RecordCell(type: 1, subType: 0, name: '拣到的钱2', amount: 20.0),
-                          RecordCell(type: 0, subType: 1, name: '拣到的钱', amount: 20.0)
-                        ],
+                        children: widgets,
                       );
                     },
 

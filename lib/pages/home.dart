@@ -3,6 +3,7 @@ import 'package:wheresmymoney/widgets/toolBar.dart';
 import '../widgets/tabView.dart';
 import '../utils/constants.dart' show tabs, appName;
 import '../models/db.dart';
+import '../models/record.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,16 +34,17 @@ class _HomePageState extends State<HomePage> {
     double _income = 0;
 
     records.forEach((element) {
-      if (element['type'] == 0) {
-        _cost += element['amount'];
+      if (element['$columnType'] == 0) {
+        _cost += element['$columnAmount'];
       } else {
-        _income += element['amount'];
+        _income += element['$columnAmount'];
       }
     });
 
     this.setState(() {
       this.totalCost = _cost.toStringAsFixed(2);
       this.totalIncome = _income.toStringAsFixed(2);
+      this.listData = records;
     });
   }
 
@@ -52,10 +54,6 @@ class _HomePageState extends State<HomePage> {
     });
 
     this._getDataByMonth(selectedDate);
-  }
-
-  _formatListData(List records) {
-    // todo 按天聚合数据
   }
 
   @override

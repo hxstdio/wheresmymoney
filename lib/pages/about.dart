@@ -31,7 +31,6 @@ class About extends StatelessWidget {
             RaisedButton(
               onPressed: () {
                 db.getTotalList().then((value) {
-                  print('-->');
                   value.forEach((element) {
                     var createDate = element['createDate'];
                     var dd = DateTime.fromMillisecondsSinceEpoch(createDate);
@@ -44,9 +43,6 @@ class About extends StatelessWidget {
             RaisedButton(
               onPressed: () {
                 db.getItemByMs(1585756800000).then((value) {
-                  print('-->');
-                  print(value);
-
                   value.forEach((element) {
                     var createDate = element['createDate'];
                     var dd = DateTime.fromMillisecondsSinceEpoch(createDate);
@@ -59,9 +55,6 @@ class About extends StatelessWidget {
             RaisedButton(
               onPressed: () {
                 db.getItemByTest().then((value) {
-                  print('-->');
-                  print(value);
-
                   value.forEach((element) {
                     var createDate = element['createDate'];
                     var dd = DateTime.fromMillisecondsSinceEpoch(createDate);

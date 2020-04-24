@@ -22,7 +22,7 @@ class TitleCell extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Color(0x4FCCCCCC),
         border: Border(bottom: BorderSide(width: 0.5, color: Color(0xF2F3F4FF)))
       ),
       child: Row(

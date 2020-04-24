@@ -25,7 +25,6 @@ class _AddRecordState extends State<AddRecord> {
     subType = 0;
     comment = '';
     super.initState();
-    db.getTotalList().then((value) => print(value));
   }
 
   void _onSubmit(double amount) {

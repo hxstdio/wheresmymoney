@@ -10,52 +10,52 @@ final costIconMapping = {
   0: {
     'icon': Icons.attach_money,
     'name': '一般',
-    'color': 0xffff0000,
+    'color': 0xff66CCCC,
   },
   1: {
     'icon': Icons.fastfood,
     'name': '餐饮',
-    'color': 0xff0000ff,
+    'color': 0xff336633,
   },
   2: {
     'icon': Icons.shop,
     'name': '服装',
-    'color': 0xffff6600,
+    'color': 0xff336699,
   },
   3: {
     'icon': Icons.traffic,
     'name': '交通',
-    'color': 0xffff9900,
+    'color': 0xff6699FF,
   },
   4: {
     'icon': Icons.music_note,
     'name': '娱乐',
-    'color': 0xffff3300,
+    'color': 0xff99CCFF,
   },
   5: {
     'icon': Icons.people_outline,
     'name': '社交',
-    'color': 0xff99ff00,
+    'color': 0xffCCCC33,
   },
   6: {
     'icon': Icons.home,
     'name': '居家',
-    'color': 0xff00ff00,
+    'color': 0xff99CC33,
   },
   7: {
     'icon': Icons.school,
     'name': '教育',
-    'color': 0xff00ffff,
+    'color': 0xff3399CC,
   },
   8: {
     'icon': Icons.nature_people,
     'name': '旅行',
-    'color': 0xffffff00,
+    'color': 0xffCC9966,
   },
   9: {
     'icon': Icons.local_hospital,
     'name': '医疗',
-    'color': 0xff6600ff,
+    'color': 0xff660033,
   },
 };
 

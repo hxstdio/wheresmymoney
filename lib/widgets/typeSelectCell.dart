@@ -35,7 +35,7 @@ class TypeSelectCell extends StatelessWidget {
                   onPressed: () {
                     _handleIconSelected(key);
                   },
-                  color: key == this.selectedSubType ? Colors.orange : Colors.white,
+                  color: key == this.selectedSubType ? Color(0xFF0099CC) : Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(18))
                   ),

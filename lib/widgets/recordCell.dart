@@ -19,7 +19,6 @@ class RecordCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {  
     var icon = type == RecordType.cost.index ? costIconMapping[subType] : incomeIconMapping[subType];
-    var iconColor = type == RecordType.cost.index ? Colors.orange : Colors.lightGreen;
 
     return Container(
       padding: const EdgeInsets.fromLTRB(15.0, 5, 10.0, 5),
@@ -34,7 +33,7 @@ class RecordCell extends StatelessWidget {
             child: Row(children: [
               Icon(
                 icon['icon'],
-                color: iconColor,
+                color: Color(0xFF0099CC),
               ),
               Container(
                 margin: const EdgeInsets.only(left: 5.0),
@@ -42,7 +41,11 @@ class RecordCell extends StatelessWidget {
               )
             ],)
           ),
-          Text('${type == 1 ? "+" : "-"} $amount')
+          Text('${type == 1 ? "+" : "-"} $amount', 
+            style: TextStyle(
+              color: type == 1 ? Color(0xFF009933) : Color(0xFF990033)
+            ),
+          )
         ],
       ),
     );

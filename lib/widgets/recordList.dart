@@ -45,8 +45,6 @@ class RecordList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('recordList --->');
-    // print(data);
     List<Widget> widgets = this._renderList(data);
 
     return SafeArea(

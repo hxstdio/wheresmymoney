@@ -52,7 +52,6 @@ class DataBaseHelper {
     var firstDayOfNextMonth = DateTime.parse('$nextTagYear-$nextTagMonthStr-01').millisecondsSinceEpoch;
     
     var sqlStr = "SELECT * FROM $tableName WHERE $columnCreateDate >= $firstDayOfMonth AND $columnCreateDate < $firstDayOfNextMonth";
-    print(sqlStr);
     var result = await dbClient.rawQuery(sqlStr);
     return result.toList();
   }

@@ -39,7 +39,7 @@ class _AddRecordState extends State<AddRecord> {
     record.createDate = this.currentDay.millisecondsSinceEpoch;
 
     db.saveItem(record);
-    Navigator.pop(context);
+    Navigator.pop(context, true);
   }
 
   void _handleDayChanged(DateTime selectedDateTime) {

@@ -56,6 +56,17 @@ class _HomePageState extends State<HomePage> {
     this._getDataByMonth(selectedDate);
   }
 
+  _navigateAndRefresh(BuildContext context) async {
+    final isRefresh = await Navigator.pushNamed(
+      context, 
+      '/add', 
+    );
+
+    if(isRefresh) {
+      this._getDataByMonth(this.currentDate);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,11 +112,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(
-            context, 
-            '/add', 
-            // arguments: ScreenArguments('From Home', 'Hao')
-          );
+          _navigateAndRefresh(context);
         },
         child: Icon(Icons.add),
       )

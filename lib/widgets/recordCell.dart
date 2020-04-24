@@ -18,7 +18,7 @@ class RecordCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {  
-    var icon = type == RecordType.cost.index ? costIconMapping[type] : incomeIconMapping[type];
+    var icon = type == RecordType.cost.index ? costIconMapping[subType] : incomeIconMapping[subType];
     var iconColor = type == RecordType.cost.index ? Colors.orange : Colors.lightGreen;
 
     return Container(

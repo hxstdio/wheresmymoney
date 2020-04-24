@@ -29,7 +29,7 @@ class TitleCell extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('$day日 - 星期${weekMapping[weekDay - 1]}'),
-          Text('支出:$cost  收入:$income'),
+          Text('支出$cost  /  收入$income'),
         ],
       ),
     );

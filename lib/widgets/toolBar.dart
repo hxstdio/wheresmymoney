@@ -36,6 +36,9 @@ class ToolBar extends StatelessWidget implements PreferredSizeWidget {
           Material(
             color: Color(tabBarBgColor),
             child: TabBar(
+              labelStyle: TextStyle(
+                fontSize: 16
+              ),
               indicatorWeight: 3.0,
               labelColor: Colors.white,
               tabs: tabs.map((String name) => Tab(text: name)).toList(),

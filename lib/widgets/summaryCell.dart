@@ -43,7 +43,7 @@ class SummaryCell extends StatelessWidget {
             },
             child: Container(
               height: cellHeight,
-              padding: const EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 10.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 15.0, 10.0, 10.0),
               decoration: BoxDecoration(
                 color: Color(appBgColor),
                 border: Border(right: BorderSide(width: 0.3, color: Color(0xFFF2F3F4)))
@@ -56,14 +56,14 @@ class SummaryCell extends StatelessWidget {
                     '${selectedDate.year}年',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12.0
+                      fontSize: 14.0
                     ),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        '${selectedDate.month}',
+                        '${selectedDate.month < 10 ? "0${selectedDate.month}" : "${selectedDate.month}"}',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 32.0

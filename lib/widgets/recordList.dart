@@ -3,16 +3,27 @@ import './recordCell.dart';
 import './titleCell.dart';
 import '../models/record.dart';
 
-class RecordList extends StatelessWidget {
+class RecordList extends StatefulWidget {
   final Map<int, List<Map<dynamic, dynamic>>> data;
-
+  
   RecordList({
     Key key ,
     @required this.data
   }):super(key:key);  
 
-  static const double sliverPadding = 0;
+  @override
+  _RecordList createState() => _RecordList();
+}
 
+class _RecordList extends State<RecordList>{
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+  
   List _renderList(Map<int, List<Map<dynamic, dynamic>>> data) {
     List<Widget> widgets = [];
     data.forEach((int key, List<Map<dynamic, dynamic>> value) {
@@ -35,8 +46,17 @@ class RecordList extends StatelessWidget {
 
     if (widgets.length == 0){
       widgets.add(Container(
-        margin: const EdgeInsets.only(top: 50.0),
-        child: Text('本月暂无纪录哦'),
+        margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 50.0),
+        child: Center(
+          child: Text('本月暂无纪录'),
+        )
+      ));
+    } else {
+      widgets.add(Container(
+        margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 50.0),
+        child: Center(
+          child: Text('就这么多哦, 下面没有了'),
+        )
       ));
     }
 
@@ -45,7 +65,7 @@ class RecordList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> widgets = this._renderList(data);
+    List<Widget> widgets = this._renderList(widget.data);
 
     return SafeArea(
       top: false,
@@ -53,25 +73,17 @@ class RecordList extends StatelessWidget {
       child: Builder(
         builder: (BuildContext context) {
           return CustomScrollView(
-            key: PageStorageKey<String>('1'),
+            controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
             slivers: <Widget>[
               SliverOverlapInjector(
                 handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               ),
-              SliverPadding(
-                padding: const EdgeInsets.all(sliverPadding),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return Column(
-                        children: widgets,
-                      );
-                    },
-
-                    childCount: 1, 
-                  ), 
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  widgets
                 ),
-              )
+              ),
             ],
           );
         },

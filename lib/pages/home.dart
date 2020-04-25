@@ -91,23 +91,16 @@ class _HomePageState extends State<HomePage> {
                         Navigator.pushNamed(
                           context, 
                           '/about', 
-                          // arguments: ScreenArguments('From Home', 'Hao')
                         );
                       },
                     )
                   ],
-                  bottom: ToolBar(
-                    tabs: tabs, 
-                    currentDate: currentDate, 
-                    totalCost: totalCost, 
-                    totalIncome: totalIncome,
-                    onDateSelected: _handleDateSelected,
-                  ),
+                  bottom: _renderToolbar()
                 ),
               )
             ];
           },
-          body: TabView(records: this.listData,)
+          body: _renderTabview()
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -118,4 +111,18 @@ class _HomePageState extends State<HomePage> {
       )
     );
   }
+
+  Widget _renderToolbar() {
+    return ToolBar(
+      tabs: tabs, 
+      currentDate: currentDate, 
+      totalCost: totalCost, 
+      totalIncome: totalIncome,
+      onDateSelected: _handleDateSelected,
+    );
+  }
+
+  Widget _renderTabview() {
+    return TabView(records: this.listData,);
+  }  
 }

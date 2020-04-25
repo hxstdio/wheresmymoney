@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './numberButton.dart';
+import '../utils/constants.dart' show outOfRange, invalidNum;
 
 class InputCell extends StatefulWidget {
   final onSubmit;
@@ -34,7 +35,7 @@ class _InputCell extends State<InputCell> {
       }
       
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text('别点了, 你没这么多钱 =.=#'),
+        content: Text('$outOfRange'),
         duration: Duration(milliseconds: 1000),
         onVisible: (){
           this.setState(() {
@@ -130,7 +131,7 @@ class _InputCell extends State<InputCell> {
 
                                 if (numberValue == 0 || numberValue == null){
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text('请输入有效的金额'),
+                                    content: Text('$invalidNum'),
                                     duration: Duration(milliseconds: 1000),
                                   ));
                                   return;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './recordCell.dart';
 import './titleCell.dart';
 import '../models/record.dart';
+import '../utils/constants.dart' show noResult, noMore;
 
 class RecordList extends StatefulWidget {
   final Map<int, List<Map<dynamic, dynamic>>> data;
@@ -45,22 +46,21 @@ class _RecordList extends State<RecordList>{
     });
 
     if (widgets.length == 0){
-      widgets.add(Container(
-        margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 50.0),
-        child: Center(
-          child: Text('本月暂无纪录'),
-        )
-      ));
+      widgets.add(_renderNoResult('$noResult'));
     } else {
-      widgets.add(Container(
-        margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 50.0),
-        child: Center(
-          child: Text('就这么多哦, 下面没有了'),
-        )
-      ));
+      widgets.add(_renderNoResult('$noMore'));
     }
 
     return widgets;
+  }
+
+  Widget _renderNoResult(String desc) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 50.0),
+      child: Center(
+        child: Text('$desc'),
+      )
+    );
   }
 
   @override

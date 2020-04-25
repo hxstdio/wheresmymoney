@@ -77,5 +77,11 @@ final incomeIconMapping = {
   }
 };
 
+final String noResult = '本月暂无纪录';
+final String noMore = '就这么多哦, 下面没有了';
+final String outOfRange = '别点了, 你没这么多钱 =.=#';
+final String invalidNum = '请输入有效的金额';
+final String noTypeResult = '暂时没有类别详情';
+
 final int appBgColor = 0xff353553;
 final int tabBarBgColor = 0xFF808392;

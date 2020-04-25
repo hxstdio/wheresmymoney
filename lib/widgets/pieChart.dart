@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import '../utils/constants.dart' show costIconMapping;
+import '../utils/constants.dart' show costIconMapping, noResult, noTypeResult;
 import '../models/record.dart';
 
 class RecordPieChart extends StatefulWidget{
@@ -17,6 +17,8 @@ class RecordPieChart extends StatefulWidget{
 class _RecordPieChart extends State<RecordPieChart>{
   int touchedIndex;
   Map typeMapIndex;
+  final double selectedRadius = 60;
+  final double noSelectedRadius = 50;
 
   @override
   void initState() {
@@ -29,37 +31,57 @@ class _RecordPieChart extends State<RecordPieChart>{
     List<PieChartSectionData> sectionList = [];
     int indexTag = 0;
 
-    data.forEach((int key, List<Map<dynamic, dynamic>> value) {
-      double cost = 0;
-      
-      value.forEach((element) {
-        cost += element['$columnAmount'];
-      });
-
+    if(data.length == 0) {
       sectionList.add(PieChartSectionData(
-        color: Color(costIconMapping[key]['color']),
-        value: cost,
-        title: costIconMapping[key]['name'],
-        radius: indexTag == this.touchedIndex ? 60 : 50,
+        color: Colors.grey,
+        value: 1, // must have a value
+        title: '无',
+        radius: noSelectedRadius,
         titleStyle: TextStyle(
-          fontSize: indexTag == this.touchedIndex ? 25 : 16,
+          fontSize: 16,
           fontWeight: FontWeight.bold, 
           color: const Color(0xffffffff)
         ),
       ));
+    } else {
+      data.forEach((int key, List<Map<dynamic, dynamic>> value) {
+        double cost = 0;
+        
+        value.forEach((element) {
+          cost += element['$columnAmount'];
+        });
 
-      indexTag++;
-    });
+        sectionList.add(PieChartSectionData(
+          color: Color(costIconMapping[key]['color']),
+          value: cost,
+          title: costIconMapping[key]['name'],
+          radius: indexTag == this.touchedIndex ? selectedRadius : noSelectedRadius,
+          titleStyle: TextStyle(
+            fontSize: indexTag == this.touchedIndex ? 25 : 16,
+            fontWeight: FontWeight.bold, 
+            color: const Color(0xffffffff)
+          ),
+        ));
+
+        indexTag++;
+      });
+    }
 
     return sectionList;
   }
 
   Widget _renderList(Map<int, List<Map<dynamic, dynamic>>> data) {
+    if (data.length == 0) {
+      return Center(
+        child: Text('$noResult'),
+      );
+    }
+
     int selectedType = data.keys.toList()[this.touchedIndex];
     List typeData = data[selectedType];
 
     if(typeData.length == 0) {
-      return Text('暂时没有类别详情');
+      return Text('$noTypeResult');
     }
 
     double cost = 0;

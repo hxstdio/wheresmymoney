@@ -41,7 +41,7 @@ class RecordCell extends StatelessWidget {
               )
             ],)
           ),
-          Text('${type == 1 ? "+" : "-"} $amount', 
+          Text('${type == 1 ? "+" : "-"} ${amount.toStringAsFixed(2)}', 
             style: TextStyle(
               color: type == 1 ? Color(0xFF009933) : Color(0xFF990033)
             ),
